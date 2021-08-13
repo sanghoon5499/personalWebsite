@@ -5,32 +5,56 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sanghoon Choi</title>
 
+        <!-- Bootstrap CDN -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
         <!-- import font -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">   
-
+    
         <!-- include stylesheet -->
         <link rel="stylesheet" href="style.css">
     </head>
 
-    <body style="background-image: url('images/bg.PNG');">  
-        <div class="center" style="display:inline-block;">
-            <h3 style="margin-left: 1%; font-size: 250%;"> hey there,</h3>
-            <h1 style="font-size: 500%;"> I'm Sanghoon Choi</h1>
-        </div>
-        <div class="center" style="display:inline-block;">
-            <img style="border-radius:50%;position:absolute;bottom: 20%;right: 18%" title="me!" src="images/pfpSquare.jpg" alt="Sanghoon Choi" width="25%" height="50%">
-        </div>
-
-        <div class="info">
-            <a href="https://www.linkedin.com/in/sanghoonchoi/"><img title="My LinkedIn!" src="images/linkedinLogo.png" alt="LinkedIn" width="3.5%" height="3.5%"></a>
-            <span style="display:inline-block; width: 2%;"></span>
-            <a href="https://github.com/sanghoon5499"> <img title="My GitHub!" src="images/githubLogo.png" alt="GtiHub" width="3.5%" height="3.5%"></a>
-            <span style="display:inline-block; width: 2%;"></span>
-            <a href="https://devpost.com/sanghoon5499"> <img title="My Devpost!" src="images/devpostLogo.png" alt="Devpost" width="3.8%" height="3.8%"></a>
-            <span style="display:inline-block; width: 2%;"></span>
-            <a href="resume.html"> <img title="My Resume!" src="images/resume.PNG" alt="Resume" width="7%"></a>
+    <body style="background-image: url('images/bg.PNG');">
+  
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div style="height: 25vh;"> 
+                    <div class="col-lg-1" style="background-color: blue;"></div>
+                </div>
+            </div>
+    
+            <div class="row" style="font-family: Jost;">
+                <div class="col-lg-1"></div>
+                <div class="col-sm-5">
+                    
+                    <span style="display:inline-block; height: 8vh;"></span>
+                    <h3 style="margin-left: 1%; font-size: 250%;"> hey there,</h3>
+                    <h1 style="font-size: 500%;"> I'm Sanghoon Choi</h1>
+    
+                    <div class="info">
+                        <span style="display:inline-block; height: 6vh;"></span>
+    
+                        <a href="https://www.linkedin.com/in/sanghoonchoi/"><img title="My LinkedIn!" src="images/linkedinLogo.png" alt="LinkedIn" width="50vw" height="50vh"></a>
+                        <span style="display:inline-block; width: 2vw;"></span>
+                        <a href="https://github.com/sanghoon5499"> <img title="My GitHub!" src="images/githubLogo.png" alt="GtiHub" width="50vw" height="50vh"></a>
+                        <span style="display:inline-block; width: 2vw;"></span>
+                        <a href="https://devpost.com/sanghoon5499"> <img title="My Devpost!" src="images/devpostLogo.png" alt="Devpost" width="58vw" height="50vh"></a>
+                        <span style="display:inline-block; width: 2vw;"></span>
+                        <a href="resume.html"> <img title="My Resume!" src="images/resume.PNG" alt="Resume" height="50vh"></a>
+                    </div>
+                </div>
+    
+                <div class="col-sm-5">
+                    <img style="border-radius:50%;" title="me!" src="images/pfpSquare.jpg" alt="Sanghoon Choi" width="60%" height="60%">
+                </div>
+            </div>
         </div>
     </body>
 </html>
