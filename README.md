@@ -5,5 +5,6 @@ Personal website is currently under construction. Check back soon!
 ```
 npm init vite
 >vanilla js
+npm install three
 npm run dev
 ```
