@@ -1,12 +1,9 @@
-# Scrollable 3D Animation with Three.js
+# Personal Website - Sanghoon Choi
+Personal website is currently under construction. Check back soon!
 
-- Watch the [full tutorial](https://youtu.be/Q7AOvWpIVHU) on YouTube
-- [Scrollable Three.js Animation](https://fireship.io/snippets/threejs-scrollbar-animation) Snippet
-
-## Usage
-
+## Usage in localhost:
 ```
-git clone <this-repo>
-npm install
+npm init vite
+>vanilla js
 npm run dev
 ```
