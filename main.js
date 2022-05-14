@@ -92,6 +92,7 @@ function handle_load4(gltf) {
   githubMesh.side = THREE.DoubleSide;
   githubMesh.castShadow = true;
   githubMesh.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
+  githubMesh.userData.name = "GITHUB"
 
   scene.add(githubMesh);
 }
@@ -108,8 +109,26 @@ function handle_load5(gltf) {
   linkedinMesh.side = THREE.DoubleSide;
   linkedinMesh.castShadow = true;
   linkedinMesh.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
+  linkedinMesh.userData.name = "LINKEDIN"
 
   scene.add(linkedinMesh);
+}
+
+loader.load( 'mail2.glb', handle_load6);
+function handle_load6(gltf) {
+  const mailMesh = gltf.scene.children[0];
+  
+  mailMesh.scale.set(mailMesh.scale.x * 1.5, mailMesh.scale.y * 1.5, mailMesh.scale.z * 1.5);
+  mailMesh.position.x = 4.5;
+  mailMesh.position.y = 4.4;//5.1
+  mailMesh.position.z = -26.2;
+  mailMesh.rotation.z = 3.1415;
+  mailMesh.side = THREE.DoubleSide;
+  mailMesh.castShadow = true;
+  mailMesh.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
+  mailMesh.userData.name = "MAIL"
+
+  scene.add(mailMesh);
 }
 
 
@@ -224,7 +243,6 @@ const desk = new THREE.Mesh(new THREE.BoxGeometry(15, 0.2, 10), new THREE.MeshLa
 const screen = new THREE.Mesh(new THREE.PlaneGeometry(3.9, 2.7), new THREE.MeshBasicMaterial({color: 0x000000}));
 
 // 2nd phase elements
-const email = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshPhongMaterial({color: 0xA7C7E7}))
 const arrow = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshPhongMaterial({color: 0xFFFFFF}))
 
 // 3rd phase elements
@@ -243,11 +261,6 @@ screen.userData.name = 'SCREEN'
 
 // 2nd phase positions
 
-email.position.z = -25; email.position.x = 4.5; email.position.y = 4;
-email.receiveShadow = true;
-email.castShadow = true;
-email.userData.name = 'EMAIL'
-
 arrow.position.z = -25; arrow.position.x = 14; arrow.position.y = 4;
 arrow.receiveShadow = true;
 arrow.castShadow = true;
@@ -259,7 +272,7 @@ projectsWall.receiveShadow = true;
 
 scene.add(wallL, wallR, floor);
 scene.add(desk, screen);
-scene.add(email, arrow);
+scene.add(arrow);
 
 
 
@@ -286,8 +299,8 @@ window.addEventListener('click', event => {
 
   raycaster.setFromCamera(mousePosition, camera);
   const found = raycaster.intersectObjects(scene.children);
-  if (found.length > 0 && found[0].object.userData.name == "SCREEN") {
-    found[0].object.material.color.setHex(0x868686);
+  if (found.length > 0 && found[0].object.userData.name == "GITHUB") {
+    console.log("akjsdkajsdlkajslkdjalsjdlaksjdlaksjdlkajsdlkajsldkjalskdjlkj")
     animateOpening();
   }
 
