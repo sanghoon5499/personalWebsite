@@ -35,7 +35,7 @@ renderer.render(scene, camera);
 // Maya assets (monitor, keyboard, mouse)
 const loader = new GLTFLoader();
 var monitorMesh = null;
-loader.load( 'monitor6.glb', handle_load);
+loader.load( 'monitor7.glb', handle_load);
 function handle_load(gltf) {
   monitorMesh = gltf.scene.children[0];
   
@@ -50,7 +50,7 @@ function handle_load(gltf) {
   scene.add(monitorMesh);
 }
 
-loader.load( 'keyboard2.glb', handle_load2);
+loader.load( 'keyboard4.glb', handle_load2);
 var keyboardMesh = null;
 function handle_load2(gltf) {
   keyboardMesh = gltf.scene.children[0];
@@ -141,7 +141,6 @@ function handle_load7(gltf) {
   
   arrowMesh.scale.set(arrowMesh.scale.x * 2, arrowMesh.scale.y * 4, arrowMesh.scale.z * 2);
   //
-  arrowMesh.position.z = -25; arrowMesh.position.x = 14; arrowMesh.position.y = 4;
   arrowMesh.position.x = 13;
   arrowMesh.position.y = 5.5;
   arrowMesh.position.z = -24;
@@ -151,6 +150,25 @@ function handle_load7(gltf) {
   arrowMesh.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
 
   scene.add(arrowMesh);
+}
+
+var arrowMesh2 = null
+loader.load( 'arrow3.glb', handle_load8);
+function handle_load8(gltf) {
+  arrowMesh2 = gltf.scene.children[0];
+  
+  arrowMesh2.scale.set(arrowMesh2.scale.x * 1, arrowMesh2.scale.y * 2, arrowMesh2.scale.z * 1);
+  //
+  arrowMesh2.position.x = 34.4;
+  arrowMesh2.position.y = 5;
+  arrowMesh2.position.z = 15;
+  arrowMesh2.rotation.z = -3.1415/2;
+  arrowMesh2.side = THREE.DoubleSide;
+  arrowMesh2.castShadow = true;
+  arrowMesh2.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
+  arrowMesh.material.color.setHex(0xFFFFFF);
+
+  scene.add(arrowMesh2);
 }
 
 
@@ -293,7 +311,7 @@ function refreshText() {
 
 //scene.add(directionalLight, directionalLight2, directionalLight3, directionalLight4);
 
-const generalLighting1 = new THREE.PointLight(0xFFF4d9, 0.2);
+const generalLighting1 = new THREE.PointLight(0xFFF4d9, 0.1);
 generalLighting1.position.set(20, 30, -5);
 generalLighting1.castShadow = true;
 generalLighting1.shadow.camera.near = 0.1;
@@ -332,7 +350,7 @@ const nameLightHelper = new THREE.PointLightHelper(nameLight);
 
 //, pointLightHelper1, pointLightHelper2, pointLightHelper3
 scene.add(mainLight, generalLighting1, generalLighting2, deskLighting, projectsLight, nameLight);
-scene.add(pointLightHelper1, pointLightHelper2, pointLightHelper3, projectsLightHelper, nameLightHelper);
+//scene.add(pointLightHelper1, pointLightHelper2, pointLightHelper3, projectsLightHelper, nameLightHelper);
 
 
 
@@ -346,7 +364,7 @@ gridHelper.position.y = 2;
 //scene.add(gridHelper)
 
 // enable orbit
-const controls = new OrbitControls(camera, renderer.domElement);
+//const controls = new OrbitControls(camera, renderer.domElement);
 
 
 // Background
@@ -370,11 +388,24 @@ const mailSolidMesh = new THREE.Mesh(new THREE.SphereGeometry(1.7, 16, 10), new 
 // 3rd phase elements
 const projectsWall = new THREE.Mesh(new THREE.PlaneGeometry(60, 36), new THREE.MeshBasicMaterial({color: 0xFFFFFF}));
 // http://jsfiddle.net/prisoner849/7j3am1pw/ <- superimpose an image onto a plane
-let  monitorSize = 14
-const project1 = new THREE.Mesh(new THREE.PlaneGeometry(monitorSize, monitorSize*0.625), new THREE.MeshBasicMaterial({color: 0x000000}));
-const project2 = new THREE.Mesh(new THREE.PlaneGeometry(monitorSize, monitorSize*0.625), new THREE.MeshBasicMaterial({color: 0x000000}));
-const project3 = new THREE.Mesh(new THREE.PlaneGeometry(monitorSize, monitorSize*0.625), new THREE.MeshBasicMaterial({color: 0x000000}));
+let displaySize = 14
+let displaySize2 = 12
+var project1Texture = new THREE.TextureLoader().load('AisoIMG.JPG');
+var project2Texture = new THREE.TextureLoader().load('RestaurandIMG.JPG');
+var project3Texture = new THREE.TextureLoader().load('EasyLangIMG.JPG');
+const project1 = new THREE.Mesh(new THREE.PlaneGeometry(displaySize, displaySize*0.625), new THREE.MeshLambertMaterial({map: project1Texture}));
+const project2 = new THREE.Mesh(new THREE.PlaneGeometry(displaySize, displaySize*0.625), new THREE.MeshLambertMaterial({map: project2Texture}));
+const project3 = new THREE.Mesh(new THREE.PlaneGeometry(displaySize, displaySize*0.625), new THREE.MeshLambertMaterial({map: project3Texture}));
 
+var project1DescTexture = new THREE.TextureLoader().load('Aiso.JPG');
+var project2DescTexture = new THREE.TextureLoader().load('Restaurand.JPG');
+var project3DescTexture = new THREE.TextureLoader().load('EasyLang.JPG');
+const project1Desc = new THREE.Mesh(new THREE.PlaneGeometry(displaySize2, displaySize2*1.528), new THREE.MeshLambertMaterial({map: project1DescTexture}));
+const project2Desc = new THREE.Mesh(new THREE.PlaneGeometry(displaySize2, displaySize2*1.137), new THREE.MeshLambertMaterial({map: project2DescTexture}));
+const project3Desc = new THREE.Mesh(new THREE.PlaneGeometry(displaySize2, displaySize2*1.083), new THREE.MeshLambertMaterial({map: project3DescTexture}));
+
+const arrowClickField = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.3), new THREE.MeshBasicMaterial({color: 0x000000, opacity: 0, transparent: true}));
+const arrowClickField2 = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.6), new THREE.MeshBasicMaterial({color: 0x000000, opacity: 0, transparent: true}));
 
 // 1st phase positions
 
@@ -392,6 +423,11 @@ screen.userData.name = 'SCREEN'
 githubSolidMesh.position.x = -12; githubSolidMesh.position.y = 5.5; githubSolidMesh.position.z = -22.2;
 linkedinSolidMesh.position.x = -4.5; linkedinSolidMesh.position.y = 5.1; linkedinSolidMesh.position.z = -24;
 mailSolidMesh.position.x = 4.5; mailSolidMesh.position.y = 5.5; mailSolidMesh.position.z = -23.2;
+arrowClickField.position.x = 13; arrowClickField.position.y = 5.5; arrowClickField.position.z = -23;
+arrowClickField.userData.name = "ARROW"
+arrowClickField2.position.x = 34; arrowClickField2.position.y = 5.6; arrowClickField2.position.z = 16;
+arrowClickField2.rotation.y = -3.1415/2
+arrowClickField2.userData.name = "ARROW2"
 githubSolidMesh.userData.name = 'GITHUB'
 linkedinSolidMesh.userData.name = 'LINKEDIN'
 mailSolidMesh.userData.name = 'MAIL'
@@ -401,19 +437,26 @@ projectsWall.position.z = -2; projectsWall.position.x = 35; projectsWall.positio
 projectsWall.rotation.y = -3.1415/2;
 projectsWall.receiveShadow = true;
 
-project1.position.z = -22; project1.position.x = 34.8; project1.position.y = 25;
+project1.position.z = -22; project1.position.x = 34.8; project1.position.y = 27;
 project1.rotation.y = -3.1415/2;
-
-project2.position.z = -2; project2.position.x = 34.8; project2.position.y = 25;
+project2.position.z = -2; project2.position.x = 34.8; project2.position.y = 27;
 project2.rotation.y = -3.1415/2;
-
-project3.position.z = 19; project3.position.x = 34.8; project3.position.y = 25;
+project3.position.z = 19; project3.position.x = 34.8; project3.position.y = 27;
 project3.rotation.y = -3.1415/2;
+
+project1Desc.position.z = -22; project1Desc.position.x = 34.8; project1Desc.position.y = 12.2;
+project1Desc.rotation.y = -3.1415/2;
+project2Desc.position.z = -2; project2Desc.position.x = 34.8; project2Desc.position.y = 14.6;
+project2Desc.rotation.y = -3.1415/2;
+project3Desc.position.z = 19; project3Desc.position.x = 34.8; project3Desc.position.y = 14.9;
+project3Desc.rotation.y = -3.1415/2;
+
+
 
 scene.add(wallL, wallR, floor);
 scene.add(desk, screen);
-scene.add(projectsWall, project1, project2, project3);
-scene.add(githubSolidMesh, linkedinSolidMesh, mailSolidMesh)
+scene.add(projectsWall, project1, project2, project3, project1Desc, project2Desc, project3Desc);
+scene.add(githubSolidMesh, linkedinSolidMesh, mailSolidMesh, arrowClickField, arrowClickField2)
 
 
 
@@ -433,8 +476,11 @@ window.addEventListener('mouseover', event => {
 window.addEventListener('keydown', logKey);
 function logKey(e) {
   if (e.key == "Enter") {
-    animateOpening()
+    animateOpening();
   }
+  // if (e.key == "a") {
+  //   animateMoveCameraToNewArea();
+  // }
 }
 
 window.addEventListener('click', event => {
@@ -446,6 +492,11 @@ window.addEventListener('click', event => {
   if (found.length > 0 && found[0].object.userData.name == "ARROW") {
     animateMoveCameraToNewArea();
   }
+  if (found.length > 0 && found[0].object.userData.name == "ARROW2") {
+    animateMoveCameraToOldArea();
+  }
+
+
   //window.open(url, '_blank').focus();
   if (found.length > 0 && found[0].object.userData.name == "GITHUB") {
     console.log("clicked github")
@@ -467,11 +518,23 @@ window.addEventListener('click', event => {
 
 function animateMoveCameraToNewArea() {
   requestAnimationFrame(animateMoveCameraToNewArea);
-
+  
   if (camera.rotation.y > -1.57) {
     camera.rotation.y -= 0.01;
     camera.position.x += 0.04;
     camera.position.y += 0.05;
+  }
+  renderer.render(scene, camera);
+}
+
+function animateMoveCameraToOldArea() {
+  requestAnimationFrame(animateMoveCameraToOldArea);
+
+  if (camera.rotation.y < 0) {
+    console.log("wtf")
+    camera.rotation.y += 0.01;
+    camera.position.x -= 0.04;
+    camera.position.y -= 0.05;
   }
   renderer.render(scene, camera);
 }
@@ -554,7 +617,7 @@ function animate() {
   id = requestAnimationFrame(animate);
 
   // enable orbit
-  controls.update();
+  //controls.update();
 
   counter += 1;
 
@@ -649,9 +712,6 @@ function animate() {
     mailMesh.rotation.z += 0.005
   }
   
-
-
-
 
 
 
