@@ -6,7 +6,7 @@ import { FontLoader } from '/Users/sangh/Documents/GitHub/personalWebsite/FontLo
 import { TextGeometry } from '/Users/sangh/Documents/GitHub/personalWebsite/TextGeometry.js';
 
 // Setup
-
+var enterTextCreated = false
 const scene = new THREE.Scene();
 var deskHeight = 2;
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.01, 1000);
@@ -21,9 +21,11 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.BasicShadowMap;
 
-camera.position.setZ(5.8);
-camera.position.setY(5+ deskHeight) // 5+ deskheight
+//0 10 -1.6
+//0, 5+deskHeight, 5.8
 camera.position.setX(0);
+camera.position.setY(5+deskHeight)
+camera.position.setZ(5.8);
 camera.rotation.x = -0.08;
 
 renderer.render(scene, camera);
@@ -81,55 +83,74 @@ function handle_load3(gltf) {
   scene.add(mouseMesh);
 }
 
+var githubMesh = null
 loader.load( 'github3.glb', handle_load4);
 function handle_load4(gltf) {
-  const githubMesh = gltf.scene.children[0];
+  githubMesh = gltf.scene.children[0];
   
   githubMesh.scale.set(githubMesh.scale.x * 1.55, githubMesh.scale.y * 1.55, githubMesh.scale.z * 1.55);
-  githubMesh.position.x = -14;
+  githubMesh.position.x = -12;
   githubMesh.position.y = 5.5;
-  githubMesh.position.z = -26.2;
+  githubMesh.position.z = -22.2;
   githubMesh.rotation.z = 3.1415;
   githubMesh.side = THREE.DoubleSide;
   githubMesh.castShadow = true;
   githubMesh.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
-  githubMesh.userData.name = "GITHUB"
 
   scene.add(githubMesh);
 }
 
+var linkedinMesh = null
 loader.load( 'linkedin3.glb', handle_load5);
 function handle_load5(gltf) {
-  const linkedinMesh = gltf.scene.children[0];
+  linkedinMesh = gltf.scene.children[0];
   
   linkedinMesh.scale.set(linkedinMesh.scale.x * 1.5, linkedinMesh.scale.y * 1.5, linkedinMesh.scale.z * 1.5);
   linkedinMesh.position.x = -4.5;
   linkedinMesh.position.y = 5.5;
-  linkedinMesh.position.z = -25;
+  linkedinMesh.position.z = -24;
   linkedinMesh.rotation.z = 3.1415;
   linkedinMesh.side = THREE.DoubleSide;
   linkedinMesh.castShadow = true;
   linkedinMesh.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
-  linkedinMesh.userData.name = "LINKEDIN"
 
   scene.add(linkedinMesh);
 }
 
-loader.load( 'mail2.glb', handle_load6);
+var mailMesh = null
+loader.load( 'mail6.glb', handle_load6);
 function handle_load6(gltf) {
-  const mailMesh = gltf.scene.children[0];
+  mailMesh = gltf.scene.children[0];
   
   mailMesh.scale.set(mailMesh.scale.x * 1.5, mailMesh.scale.y * 1.5, mailMesh.scale.z * 1.5);
   mailMesh.position.x = 4.5;
   mailMesh.position.y = 5.5;
-  mailMesh.position.z = -26.2;
+  mailMesh.position.z = -23.2;
   mailMesh.rotation.z = 3.1415;
   mailMesh.side = THREE.DoubleSide;
   mailMesh.castShadow = true;
   mailMesh.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
-  mailMesh.userData.name = "MAIL"
 
   scene.add(mailMesh);
+}
+
+var arrowMesh = null
+loader.load( 'arrow1.glb', handle_load7);
+function handle_load7(gltf) {
+  arrowMesh = gltf.scene.children[0];
+  
+  arrowMesh.scale.set(arrowMesh.scale.x * 2, arrowMesh.scale.y * 4, arrowMesh.scale.z * 2);
+  //
+  arrowMesh.position.z = -25; arrowMesh.position.x = 14; arrowMesh.position.y = 4;
+  arrowMesh.position.x = 13;
+  arrowMesh.position.y = 5.5;
+  arrowMesh.position.z = -24;
+  arrowMesh.rotation.z = 0;
+  arrowMesh.side = THREE.DoubleSide;
+  arrowMesh.castShadow = true;
+  arrowMesh.traverse( function( node ) { if ( node instanceof THREE.Mesh ) { node.castShadow = true; } } );
+
+  scene.add(arrowMesh);
 }
 
 
@@ -147,19 +168,13 @@ const fontLoader = new FontLoader();
 // Quicksand-Light_Regular.json
 fontLoader.load('Quicksand-Light_Regular.json', (droidFont) => {
   const textGeometry = new TextGeometry('Sanghoon Choi', {
-    height: 7, size: 15, font: droidFont,
+    height: 0.01, size: 3, font: droidFont,
   });
-
   const textMaterial = new THREE.MeshNormalMaterial();
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-  textMesh.position.x = -80;
-  textMesh.position.y = 10;
-  textMesh.position.z = -100;
-
-  textMesh.rotation.y = 0.2;
-
-  textMesh.castShadow = true;
-
+  textMesh.position.x = -15;
+  textMesh.position.y = 15;
+  textMesh.position.z = -20;
   scene.add(textMesh);
 });
 
@@ -167,22 +182,37 @@ fontLoader.load('Quicksand-Light_Regular.json', (droidFont) => {
 
 // monitor text
 var npmInit = null
-var npmInitText = ''
 var variant = null
-var variantText = ''
 var twoDim = null
-var twoDimText = ''
 var threeDim = null
-var threeDimText = ''
 var npmRunDev = null
-var npmRunDevText = ''
 var enterToContinue = null
-var enterToContinueText = ''
 var runningAt = null
+
+var npmInitText = ''
+var variantText = ''
+var twoDimText = ''
+var threeDimText = ''
+var npmRunDevText = ''
+var enterToContinueText = ''
 var runningAtText = ''
+
+var npmInitMesh = null
+var variantMesh = null
+var twoDimMesh = null
+var threeDimMesh = null
+var npmRunDevMesh = null
+var enterToContinueMesh = null
+var runningAtMesh = null
+
 var continueMaterial = null
+var textMaterial = null
+
 
 function createText() {
+  fontLoader.load('Quicksand-Light_Regular.json', (fontStyle) => {
+
+  });
   fontLoader.load('Source-Code-Pro-ExtraLight_Regular.json', (fontStyle) => {
     const textCursor = new TextGeometry('|', {
       height: 0.01, size: 0.15, font: fontStyle,
@@ -210,49 +240,53 @@ function createText() {
     });
   
     const extrusion = 0.35; // distance from text to monitor (0.35 is technically the distance from origin)
-  
-    const textMaterial = new THREE.MeshBasicMaterial();
-    const npmInitMesh = new THREE.Mesh(npmInit, textMaterial);
+    textMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
+
+
+    npmInitMesh = new THREE.Mesh(npmInit, textMaterial);
     npmInitMesh.position.x = -2;
     npmInitMesh.position.y = 8.8;
     npmInitMesh.position.z = extrusion;
   
-    const variantMesh = new THREE.Mesh(variant, textMaterial);
+    variantMesh = new THREE.Mesh(variant, textMaterial);
     variantMesh.position.x = -2;
     variantMesh.position.y = 8.5;
     variantMesh.position.z = extrusion;
   
-    const threeDimMesh = new THREE.Mesh(threeDim, textMaterial);
+    threeDimMesh = new THREE.Mesh(threeDim, textMaterial);
     threeDimMesh.position.x = -2;
     threeDimMesh.position.y = 8.2;
     threeDimMesh.position.z = extrusion;
 
-    const twoDimMesh = new THREE.Mesh(twoDim, textMaterial);
+    twoDimMesh = new THREE.Mesh(twoDim, textMaterial);
     twoDimMesh.position.x = -2;
     twoDimMesh.position.y = 7.9;
     twoDimMesh.position.z = extrusion;
   
-    const npmRunDevMesh = new THREE.Mesh(npmRunDev, textMaterial);
+    npmRunDevMesh = new THREE.Mesh(npmRunDev, textMaterial);
     npmRunDevMesh.position.x = -2;
     npmRunDevMesh.position.y = 7.6;
     npmRunDevMesh.position.z = extrusion;
 
-    const runningAtMesh = new THREE.Mesh(runningAt, textMaterial);
+    runningAtMesh = new THREE.Mesh(runningAt, textMaterial);
     runningAtMesh.position.x = -2;
     runningAtMesh.position.y = 7.3;
     runningAtMesh.position.z = extrusion;
   
     continueMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF});
-    const continueMesh = new THREE.Mesh(enterToContinue, continueMaterial);
-    continueMesh.position.x = -1.1;
-    continueMesh.position.y = 6.3;
-    continueMesh.position.z = extrusion;
+    enterToContinueMesh = new THREE.Mesh(enterToContinue, continueMaterial);
+    enterToContinueMesh.position.x = -1.1;
+    enterToContinueMesh.position.y = 6.3;
+    enterToContinueMesh.position.z = extrusion;
   
-    scene.add(npmInitMesh, variantMesh, twoDimMesh, threeDimMesh, npmRunDevMesh, continueMesh, runningAtMesh);
+    scene.add(npmInitMesh, variantMesh, twoDimMesh, threeDimMesh, npmRunDevMesh, enterToContinueMesh, runningAtMesh);
   });
 };
 
-
+function refreshText() {
+  scene.remove(npmInitMesh, variantMesh, twoDimMesh, threeDimMesh, npmRunDevMesh, enterToContinueMesh, runningAtMesh);
+  createText();
+}
 
 
 // Lights/Lighting
@@ -309,10 +343,10 @@ scene.add(pointLightHelper1, pointLightHelper2, pointLightHelper3, projectsLight
 // const lightHelper = new THREE.PointLightHelper(pointLight)
 const gridHelper = new THREE.GridHelper(500, 50);
 gridHelper.position.y = 2;
-scene.add(gridHelper)
+//scene.add(gridHelper)
 
 // enable orbit
-//const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 
 
 // Background
@@ -327,17 +361,26 @@ const floor = new THREE.Mesh(new THREE.BoxGeometry(800, 1, 400), new THREE.MeshP
 const desk = new THREE.Mesh(new THREE.BoxGeometry(15, 0.2, 10), new THREE.MeshPhongMaterial({color: 0xDEB887}));
 const screen = new THREE.Mesh(new THREE.PlaneGeometry(4.5, 3.2), new THREE.MeshBasicMaterial({color: 0x000000}));
 
-// 2nd phase elements
-const arrow = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshPhongMaterial({color: 0xFFFFFF}));
+// cubes
+const githubSolidMesh = new THREE.Mesh(new THREE.SphereGeometry(1.7, 10, 10), new THREE.MeshBasicMaterial({color: 0xFFFFFF}));
+const linkedinSolidMesh = new THREE.Mesh(new THREE.SphereGeometry(1.7, 10, 10), new THREE.MeshBasicMaterial({color: 0xFFFFFF}));
+const mailSolidMesh = new THREE.Mesh(new THREE.SphereGeometry(1.7, 16, 10), new THREE.MeshBasicMaterial({color: 0xFFFFFF}));
+
 
 // 3rd phase elements
-const projectsWall = new THREE.Mesh(new THREE.BoxGeometry(80, 1, 40), new THREE.MeshPhongMaterial({color: 0xFFB347}));
+const projectsWall = new THREE.Mesh(new THREE.PlaneGeometry(60, 36), new THREE.MeshBasicMaterial({color: 0xFFFFFF}));
+// http://jsfiddle.net/prisoner849/7j3am1pw/ <- superimpose an image onto a plane
+let  monitorSize = 14
+const project1 = new THREE.Mesh(new THREE.PlaneGeometry(monitorSize, monitorSize*0.625), new THREE.MeshBasicMaterial({color: 0x000000}));
+const project2 = new THREE.Mesh(new THREE.PlaneGeometry(monitorSize, monitorSize*0.625), new THREE.MeshBasicMaterial({color: 0x000000}));
+const project3 = new THREE.Mesh(new THREE.PlaneGeometry(monitorSize, monitorSize*0.625), new THREE.MeshBasicMaterial({color: 0x000000}));
+
 
 // 1st phase positions
 
 wallL.position.z = -2; wallL.position.x = -5; wallL.position.y = 6 + deskHeight;
 wallR.position.z = -2; wallR.position.x = 5; wallR.position.y = 6 + deskHeight;
-floor.position.z = -10; floor.position.x = 0; floor.position.y = 2;
+floor.position.z = 140; floor.position.x = 0; floor.position.y = 2;
 floor.receiveShadow = true;
 desk.position.z = 3.75; desk.position.x = 0; desk.position.y = 3 + deskHeight;
 desk.receiveShadow = true;
@@ -346,21 +389,31 @@ wallR.receiveShadow = true;
 screen.position.z = 0.32; screen.position.x = 0; screen.position.y = 5.6 + deskHeight;
 screen.userData.name = 'SCREEN'
 
-
-// 2nd phase positions
-
-arrow.position.z = -25; arrow.position.x = 14; arrow.position.y = 4;
-arrow.receiveShadow = true;
-arrow.castShadow = true;
-arrow.userData.name = 'ARROW'
+githubSolidMesh.position.x = -12; githubSolidMesh.position.y = 5.5; githubSolidMesh.position.z = -22.2;
+linkedinSolidMesh.position.x = -4.5; linkedinSolidMesh.position.y = 5.1; linkedinSolidMesh.position.z = -24;
+mailSolidMesh.position.x = 4.5; mailSolidMesh.position.y = 5.5; mailSolidMesh.position.z = -23.2;
+githubSolidMesh.userData.name = 'GITHUB'
+linkedinSolidMesh.userData.name = 'LINKEDIN'
+mailSolidMesh.userData.name = 'MAIL'
 
 // 3rd phase positions
-projectsWall.position.z = -30; projectsWall.position.x = 0; projectsWall.position.y = 50;
+projectsWall.position.z = -2; projectsWall.position.x = 35; projectsWall.position.y = 15;
+projectsWall.rotation.y = -3.1415/2;
 projectsWall.receiveShadow = true;
+
+project1.position.z = -22; project1.position.x = 34.8; project1.position.y = 25;
+project1.rotation.y = -3.1415/2;
+
+project2.position.z = -2; project2.position.x = 34.8; project2.position.y = 25;
+project2.rotation.y = -3.1415/2;
+
+project3.position.z = 19; project3.position.x = 34.8; project3.position.y = 25;
+project3.rotation.y = -3.1415/2;
 
 scene.add(wallL, wallR, floor);
 scene.add(desk, screen);
-scene.add(arrow);
+scene.add(projectsWall, project1, project2, project3);
+scene.add(githubSolidMesh, linkedinSolidMesh, mailSolidMesh)
 
 
 
@@ -375,11 +428,14 @@ window.addEventListener('mouseover', event => {
 
   raycaster.setFromCamera(mousePosition, camera);
   const found = raycaster.intersectObjects(scene.children);
-  if (found.length > 0 && found[0].object.userData.name == "GITHUB") {
-    animateGithub();
-    console.log("GITHUB")
-  }
 })
+
+window.addEventListener('keydown', logKey);
+function logKey(e) {
+  if (e.key == "Enter") {
+    animateOpening()
+  }
+}
 
 window.addEventListener('click', event => {
   mousePosition.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -387,41 +443,40 @@ window.addEventListener('click', event => {
 
   raycaster.setFromCamera(mousePosition, camera);
   const found = raycaster.intersectObjects(scene.children);
-  if (found.length > 0 && found[0].object.userData.name == "SCREEN") {
-    animateOpening();
-  }
-
   if (found.length > 0 && found[0].object.userData.name == "ARROW") {
     animateMoveCameraToNewArea();
   }
-
-  // if (found.length > 0) {
-  //   found[0].object.material.color.setHex(0xFFFFFF);
-  // }
+  //window.open(url, '_blank').focus();
+  if (found.length > 0 && found[0].object.userData.name == "GITHUB") {
+    console.log("clicked github")
+    window.open('https://github.com/sanghoon5499', '_blank').focus();
+  }
+  if (found.length > 0 && found[0].object.userData.name == "LINKEDIN") {
+    console.log("clicked linkedin")
+    window.open('https://www.linkedin.com/in/sanghoonchoi/', '_blank').focus();
+  }
+  if (found.length > 0 && found[0].object.userData.name == "MAIL") {
+    console.log("clicked linkedin")
+    window.open('mailto:sanghoon.choi@uwaterloo.ca', '_blank').focus();
+  }
 })
 
-
-
 // Custom Animations
+
+
 
 function animateMoveCameraToNewArea() {
   requestAnimationFrame(animateMoveCameraToNewArea);
 
-  console.log(camera.rotation.z);
-
-  if (camera.rotation.x < 1.5) {
-    camera.rotation.x += 0.001;
+  if (camera.rotation.y > -1.57) {
+    camera.rotation.y -= 0.01;
+    camera.position.x += 0.04;
+    camera.position.y += 0.05;
   }
-  
-
-
-
   renderer.render(scene, camera);
 }
 
-function animateGithub() {
-  github.rotation.y += 0.001
-}
+
 
 // change camera speed depending on screen size
 // change animation speed depending on screen size
@@ -429,7 +484,7 @@ function animateOpening() {
   requestAnimationFrame(animateOpening);
 
   // move camera to y=5.5
-  if (camera.position.y < 5.5) {
+  if (camera.position.y < 10) {
     camera.position.y += 0.01;
   }
   if (camera.position.z > -1.5) {
@@ -449,23 +504,36 @@ function animateOpening() {
     wallR.position.y -= 0.1;
   }
 
+  if  (camera.rotation.x < 0) {
+    camera.rotation.x += 0.001;
+  }
+
 
 
   // move monitor, keyboard, mouse, and desk
-  if (monitorMesh.position.y > -4){
-    monitorMesh.position.y -= 0.015;
-    screen.position.y -= 0.015;
+  // if (monitorMesh.position.y > -4){
+  //   const speed = 0.015;
 
-    keyboardMesh.position.y -= 0.015;
-    mouseMesh.position.y -= 0.015;
-    desk.position.y -= 0.015;
-  }
+  //   monitorMesh.position.y -= speed;
+  //   screen.position.y -= speed;
+
+  //   keyboardMesh.position.y -= speed;
+  //   mouseMesh.position.y -= speed;
+  //   desk.position.y -= speed;
+    
+  //   npmInitMesh.position.y -= speed;
+  //   variantMesh.position.y -= speed;
+  //   twoDimMesh.position.y -= speed;
+  //   threeDimMesh.position.y -= speed;
+  //   npmRunDevMesh.position.y -= speed;
+  //   enterToContinueMesh.position.y -= speed;
+  //   runningAtMesh.position.y -= speed;
+  // }
   
-  
+  //0 10.009999999999936 -1.5099999999999218
 
   renderer.render(scene, camera);
 }
-
 
 
 // Main animation Loop
@@ -486,12 +554,12 @@ function animate() {
   id = requestAnimationFrame(animate);
 
   // enable orbit
-  //controls.update();
+  controls.update();
 
   counter += 1;
 
   // initial screen text typing
-  if (arrayCounter < npmInitTextArray.length) {
+  if (arrayCounter < npmInitTextArray.length && counter > 100) {
     if (Math.floor(counter) % 10 == 0) {
       npmInitText += npmInitTextArray[arrayCounter];
       arrayCounter += 1;
@@ -546,7 +614,7 @@ function animate() {
   }
 
   
-  if (doneNpmRunDev) {
+  if (doneNpmRunDev && counter < 10000) {
     if (Math.floor(counter) % 99 == 0) {
       if (flipColor) {
         continueMaterial.color.setHex(0xFFFFFF);
@@ -559,11 +627,38 @@ function animate() {
     }
   }
 
-  if (counter > 10000) {
-    cancelAnimationFrame( id );
+
+  // end of initial animation
+
+
+  // rotating cubes
+  if (counter > 1000) {
+    if (githubMesh.rotation.z >= 6.283) {
+      githubMesh.rotation.z = 0
+    }
+    githubMesh.rotation.z += 0.005
+  
+    if (linkedinMesh.rotation.z >= 6.283) {
+      linkedinMesh.rotation.z = 0
+    }
+    linkedinMesh.rotation.z += 0.005
+
+    if (mailMesh.rotation.z >= 6.283) {
+      mailMesh.rotation.z = 0
+    }
+    mailMesh.rotation.z += 0.005
   }
-// stop the counting of counter at one point
+  
+
+
+
+
+
+
+
+
+
+
   renderer.render(scene, camera);
 }
-
 animate();
