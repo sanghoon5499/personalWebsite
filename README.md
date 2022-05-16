@@ -16,3 +16,5 @@ npm init vite
 npm install three
 npm run dev
 ```
+
+https://hackernoon.com/publishing-a-threejs-project-on-github-pages-1d1a33dn
