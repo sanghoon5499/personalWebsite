@@ -1,8 +1,9 @@
+
 import {
 	FileLoader,
 	Loader,
 	ShapePath
-} from 'three';
+} from 'https://unpkg.com/three@<version>/build/three.module.js';
 
 class FontLoader extends Loader {
 
