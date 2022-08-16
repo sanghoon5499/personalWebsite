@@ -1,5 +1,5 @@
 import './style.css';
-import * as THREE from 'three';
+import * as THREE from 'https://unpkg.com/three@<version>/build/three.module.js'; //previously: 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { FontLoader } from '/Users/sangh/Documents/GitHub/personalWebsite/FontLoader.js';
