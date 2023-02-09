@@ -1,9 +1,9 @@
 import './style.css';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
+//import {OrbitControls} from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { FontLoader } from '/Users/sangh/Documents/GitHub/personalWebsite/FontLoader.js';
-import { TextGeometry } from '/Users/sangh/Documents/GitHub/personalWebsite/TextGeometry.js';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 // Setup
 var enterTextCreated = false
