@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css">
     <title>Sanghoon Choi</title>
+
+    <!--https://stackoverflow.com/questions/68160473/failed-to-resolve-module-specifier-three-->
+    <script type="importmap">
+      {
+          "imports": {
+              "three": "./build/three.module.js",
+              "three/examples/jsm/controls/OrbitControls":"./jsm/controls/OrbitControls.js",
+              "three/examples/jsm/libs/stats.module":"./jsm/libs/stats.module.js",
+              "three/examples/jsm/loaders/GLTFLoader":"./jsm/loaders/GLTFLoader.js",
+              "three/examples/jsm/loaders/FontLoader":"./jsm/loaders/FontLoader.js",
+              "three/examples/jsm/geometries/TextGeometry":"./jsm/geometries/TextGeometry.js",
+          }
+      }
+  </script>
   </head>
   <body>
 
@@ -15,9 +29,11 @@
 
 
     </main>
+
+    
     
     <script type="module" src="/main.js"></script>
-
+    
 
   </body>
 </html>
